@@ -95,3 +95,6 @@ Initial release
 Added method set and made count parameter optional for atIndexRange
 - `set(index: number, value: bit)`
 - `atIndexRange(index: number, count?: number)` 
+
+### 1.2.0
+Added code coverage badge creation on running tests
