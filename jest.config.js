@@ -14,4 +14,9 @@ module.exports = {
     "json",
     "node"
   ],
+  coverageReporters: [
+    "json-summary", 
+    "text",
+    "lcov"
+  ]
 }
