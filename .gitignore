@@ -1,6 +1,7 @@
 node_modules/
 dev/
 coverage/
+!coverage/badge-*.svg
 npm-debug.log
 yarn-error.log
 yarn.lock

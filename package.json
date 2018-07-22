@@ -24,6 +24,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.1",
     "jest": "^23.4.1",
+    "jest-coverage-badges": "^1.0.0",
     "ts-jest": "^23.0.1",
     "ts-loader": "^4.1.0",
     "typescript": "^2.7.2",
@@ -36,6 +37,6 @@
   "scripts": {
     "start": "webpack-dev-server --open-page dev/index.html --config webpack.dev.js --mode development ",
     "build": "webpack --config webpack.prod.js --mode production",
-    "test": "jest --coverage"
+    "test": "jest --coverage && jest-coverage-badges"
   }
 }
