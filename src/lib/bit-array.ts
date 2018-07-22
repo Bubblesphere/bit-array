@@ -15,8 +15,8 @@ export default class BitArray {
    */
   constructor(values: Array<bit>) {
     this._pushedSize = 0;
-    this._size = values.length;
-    this._array = new Uint8Array(Math.ceil(this._size/this._bitPerIndex));
+    this._size = Math.ceil(values.length === 0 ? 1 : values.length /this._bitPerIndex);
+    this._array = new Uint8Array(this._size);
     this._pointer = 0;
     this.pushAll(values);
   }
@@ -28,12 +28,32 @@ export default class BitArray {
     return this._pushedSize;
   }
 
+  public set(index: number, value: bit) {
+    if (index < 0) {
+      throw `The specified index (${index}) has to be greater or equal to 0`;
+    }
+
+    if (index > this._pushedSize - 1) {
+      throw `The specified index (${index}) has to be between 0 and ${this._pushedSize - 1}`;
+    }
+
+    const persist = {
+      pointer: this._pointer,
+      pushedSize: this._pushedSize
+    }
+
+    this._pointer = index;
+    this.push(value);
+    this._pointer = persist.pointer;
+    this._pushedSize = persist.pushedSize;
+  }
+
   /**
    * Pushes a single bit onto the array
    * @param value The bit to push onto the array
    */
   public push(value: bit) {
-    if (this._pointer == this._size) {
+    if (this._pointer == this._size * this._bitPerIndex) {
       this._increaseArraySize();
     }
     // create a mask for current index.
@@ -71,6 +91,10 @@ export default class BitArray {
    * @param index The index of the bit to return
    */
   public atIndex(index: number): bit {
+    if (index < 0) {
+      throw `The specified index (${index}) has to be greater or equal to 0`;
+    }
+
     if (index > this._pushedSize) {
       throw `Index (${index}) exceeds the size of the bit array (${this._pushedSize})`;
     }
@@ -84,9 +108,17 @@ export default class BitArray {
    * @param index The index of the first bit to return
    * @param count The amount of bits to fetch starting at the index
    */
-  public atIndexRange(index: number, count: number): bit[] {
-    if (index + count - 1 > this._pushedSize) {
-      throw `Index (${index}) exceeds the size of the bit array (${this._pushedSize})`;
+  public atIndexRange(index: number, count?: number): bit[] {
+    if (index < 0) {
+      throw `The specified index (${index}) has to be greater or equal to 0`;
+    }
+
+    if (count == null) {
+      count = this._pushedSize - index;
+    }
+
+    if (index + count > this._pushedSize) {
+      throw `Index (${index + count}) exceeds the size of the bit array (${this._pushedSize})`;
     }
   
     const values: bit[] = [];
@@ -123,7 +155,7 @@ export default class BitArray {
   private _increaseArraySize() {
     this._size = this._size * 2;
     const tempArr = this._array.slice();
-    this._array = new Uint8Array(Math.ceil(this._size/this._bitPerIndex));
-    this._array = tempArr.slice();
+    this._array = new Uint8Array(this._size);
+    tempArr.forEach((value, index) => this._array[index] = value);
   }
 };
