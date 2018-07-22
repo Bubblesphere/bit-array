@@ -66,7 +66,8 @@ Method | Description
 **`pushAll(values: Array<bit>)`** | Pushes a an array of bits onto the array
 **`push(value: bit)`** | Pushes a single bit onto the array
 **`atIndex(index: number)`** | Gets the bit at a given index.
-**`atIndexRange(index: number, count: number)`** | Gets count bits at a given index
+**`atIndexRange(index: number, count?: number)`** | Gets count bits at a given index. If count is null, the range goes to the end of the array
+**`set(index: number, value: bit)`** | Sets a specified bit at an index of the array
 
 #### Properties
 Property | Description
@@ -82,3 +83,7 @@ Initial release
 - `atIndexRange(index: number, count: number)`
 - `size`
 
+### 1.1.0
+Added method set and made count parameter optional for atIndexRange
+- `set(index: number, value: bit)`
+- `atIndexRange(index: number, count?: number)` 
