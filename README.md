@@ -1,5 +1,13 @@
 # bit-array
 
+**License**:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+**Branches, Functions, Lines, Statements**:
+![Coverage Branches](./coverage/badge-branches.svg)
+![Coverage Functions](./coverage/badge-functions.svg)
+![Coverage Lines](./coverage/badge-lines.svg)
+![Coverage Statements](./coverage/badge-statements.svg)
+
 Save memory space by using a BitArray! Behind the scene, the library stores bits within elements of a `Uint8Array` resulting in memory space savings.
 
 ```typescript
@@ -65,7 +73,7 @@ Method | Description
 --- | --- 
 **`pushAll(values: Array<bit>)`** | Pushes a an array of bits onto the array
 **`push(value: bit)`** | Pushes a single bit onto the array
-**`atIndex(index: number)`** | Gets the bit at a given index.
+**`atIndex(index: number)`** | Gets the bit at a given index
 **`atIndexRange(index: number, count?: number)`** | Gets count bits at a given index. If count is null, the range goes to the end of the array
 **`set(index: number, value: bit)`** | Sets a specified bit at an index of the array
 
